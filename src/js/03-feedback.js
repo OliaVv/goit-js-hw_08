@@ -1,45 +1,45 @@
 import throttle from 'lodash.throttle';
 import { save, load, remove } from './storage';
 
-const formRef = document.querySelector('.feedback-form');
-const LOCAL_STORAGE_KEY = 'feedback-form-state';
+const formEl = document.querySelector('.feedback-form');
+const STORAGE_KEY = 'feedback-form-state';
 
 initPage();
 
-const onFormInput = event => {
-  const { name, value } = event.target;
+const onFormInput = evt => {
+  const { name, value } = evt.target;
 
-  let saveData = load(LOCAL_STORAGE_KEY);
+  let saveData = load(STORAGE_KEY);
   saveData = saveData ? saveData : {};
 
   saveData[name] = value;
 
-  save(LOCAL_STORAGE_KEY, saveData);
+  save(STORAGE_KEY, saveData);
 };
 
-formRef.addEventListener('input', throttle(onFormInput, 500));
+formEl.addEventListener('input', throttle(onFormInput, 500));
 
 function initPage() {
-  const saveData = load(LOCAL_STORAGE_KEY);
+  const saveData = load(STORAGE_KEY);
 
   if (!saveData) {
     return;
   }
   Object.entries(saveData).forEach(([name, value]) => {
-    formRef.elements[name].value = value;
+    formEl.elements[name].value = value;
   });
 }
 
-const handleSubmit = event => {
-  event.preventDefault();
+const handleSubmit = evt => {
+  evt.preventDefault();
 
   const {
     elements: { email, message },
-  } = event.currentTarget;
+  } = evt.currentTarget;
 
   console.log({ email: email.value, message: message.value });
-  event.currentTarget.reset();
-  remove(LOCAL_STORAGE_KEY);
+  evt.currentTarget.reset();
+  remove(STORAGE_KEY);
 };
 
-formRef.addEventListener('submit', handleSubmit);
+formEl.addEventListener('submit', handleSubmit);
