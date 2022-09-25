@@ -4,6 +4,8 @@ import { save, load, remove } from './storage';
 const formEl = document.querySelector('.feedback-form');
 const STORAGE_KEY = 'feedback-form-state';
 
+console.log(formEl);
+
 initPage();
 
 const onFormInput = evt => {
