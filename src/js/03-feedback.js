@@ -39,7 +39,7 @@ const handleSubmit = evt => {
     elements: { email, message },
   } = evt.currentTarget;
 if (email.value === '' || message.value === '') {
-    return alert('Please fill in all the fields!');
+    return alert('Заповніть всі поля!');
   }
   console.log({ email: email.value, message: message.value });
   evt.currentTarget.reset();
