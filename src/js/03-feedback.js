@@ -38,7 +38,9 @@ const handleSubmit = evt => {
   const {
     elements: { email, message },
   } = evt.currentTarget;
-
+if (email.value === '' || message.value === '') {
+    return alert('Please fill in all the fields!');
+  }
   console.log({ email: email.value, message: message.value });
   evt.currentTarget.reset();
   remove(STORAGE_KEY);

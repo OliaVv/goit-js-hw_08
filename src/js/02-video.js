@@ -9,6 +9,12 @@ player.on('timeupdate', throttle(playOn, 1000));
 function playOn(data) {
     localStorage.setItem("videoplayer-current-time", data.seconds);
 }
-const playedTime = localStorage.getItem("videoplayer-current-time");
 
-player.setCurrentTime(playedTime);
+function setTime() {
+    let playedTime = localStorage.getItem("videoplayer-current-time");
+if (playedTime) {
+    player.setCurrentTime(playedTime);
+} else player.setCurrentTime(0);
+
+}
+setTime();
